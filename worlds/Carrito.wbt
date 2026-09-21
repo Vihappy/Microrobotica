@@ -1,0 +1,97 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/GlossyPaint.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.2328604999284368 0.30066943005767416 -0.9248642502561508 1.3942448500303224
+  position -0.636705693002344 2.199743503543327 1.379716572937737
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+Robot {
+  children [
+    Shape {
+      appearance GlossyPaint {
+        baseColor 1 0 0
+      }
+      geometry Box {
+        size 0.2 0.1 0.05
+      }
+    }
+    HingeJoint {
+      endPoint Solid {
+        translation 0.05 -0.06 0
+        children [
+          Solid {
+            translation 0 0 0.04
+            rotation 1 0 0 1.5707963267948968
+            children [
+              Shape {
+                appearance GlossyPaint {
+                  baseColor 0.1 0.1 1
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.04
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(3)"
+      }
+    }
+    HingeJoint {
+      endPoint Solid {
+        translation -0.05 0.06 0
+        children [
+          Solid {
+            rotation 1 0 0 1.5707963267948968
+            children [
+              Shape {
+                appearance GlossyPaint {
+                  baseColor 0.1 0.1 1
+                }
+                geometry Cylinder {
+                  height 0.02
+                  radius 0.04
+                }
+              }
+            ]
+          }
+        ]
+        name "solid(2)"
+      }
+    }
+    HingeJoint {
+      endPoint Solid {
+        translation -0.05 -0.06 0
+        name "solid(1)"
+      }
+    }
+    HingeJoint {
+      endPoint Solid {
+        translation 0.05 0.06 0
+      }
+    }
+  ]
+  boundingObject Shape {
+    appearance GlossyPaint {
+      baseColor 1 0 0
+    }
+    geometry Box {
+      size 0.2 0.1 0.05
+    }
+  }
+  physics Physics {
+  }
+}

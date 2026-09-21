@@ -1,0 +1,119 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Copper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/OsbWood.proto"
+
+WorldInfo {
+  basicTimeStep 4
+}
+Viewpoint {
+  orientation -0.03357621490820894 0.02231350649204826 -0.9991870421600088 3.060841556655313
+  position 0.6944153477248663 0.3937463146655113 0.7239770735466782
+  follow "robot:solid"
+  followType "Mounted Shot"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 8 6
+  floorTileSize 0.34 0.34
+}
+Solid {
+  translation 0 0 0.27
+  children [
+    Solid {
+      children [
+        Shape {
+          appearance OsbWood {
+          }
+          geometry DEF GEOMETRIA_MESA Box {
+            size 0.7 0.5 0.76
+          }
+        }
+      ]
+      boundingObject USE GEOMETRIA_MESA
+    }
+  ]
+  name "mesa"
+}
+Robot {
+  translation 0 0.22 0.66
+  children [
+    Solid {
+      translation 0 0.015 0
+      children [
+        Shape {
+          appearance Copper {
+          }
+          geometry Box {
+            size 0.01 0.0305 0.0211
+          }
+        }
+      ]
+      name "Cuerpo_motor"
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 6.2832
+        axis 0 1 0
+        anchor 0 0.0178 0
+        dampingConstant 0.001
+      }
+      device [
+        RotationalMotor {
+          name "motor"
+        }
+        PositionSensor {
+          name "encoder"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.01526 0
+        rotation 0 1 0 0.005
+        children [
+          Pose {
+            translation 0 0.0178 0.07
+            rotation 0 -1 0 0.0005
+            children [
+              Shape {
+                geometry Cylinder {
+                  height 0.14
+                  radius 0.0025
+                }
+              }
+              Solid {
+                translation 0 0 0.07
+                children [
+                  Shape {
+                    geometry Sphere {
+                      radius 0.01
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+        name "Pendulo"
+        boundingObject Pose {
+          translation 0 0.0178 0.07
+          children [
+            Cylinder {
+              height 0.14
+              radius 0.0025
+            }
+          ]
+        }
+      }
+    }
+  ]
+  recognitionColors [
+    0 0 0
+  ]
+  controller "controlador_pendulo"
+}
